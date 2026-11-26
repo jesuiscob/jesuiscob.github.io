@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Antoine – Cybersécurité</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#070b14;--panel:#0d1424;--line:#1c2a44;--txt:#d6e2f5;--dim:#7d8fb0;--cy:#38e1ff;--pk:#ff4d8d;--ok:#6dffb0}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 "JetBrains Mono",ui-monospace,Menlo,monospace;
+background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;background-attachment:fixed}
+body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0,transparent 0,var(--bg) 75%);pointer-events:none;z-index:0}
+main,nav{position:relative;z-index:1}
+a{color:var(--cy);text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--pk);outline-offset:3px}
+h1,h2,h3{font-family:"Chakra Petch",system-ui,sans-serif;margin:0;line-height:1.1}
+nav{display:flex;justify-content:space-between;align-items:center;max-width:1000px;margin:0 auto;padding:20px 24px;font-size:14px}
+nav .logo{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:18px;color:var(--txt)}
+nav .logo b{color:var(--pk)}
+nav div{display:flex;gap:20px;flex-wrap:wrap}
+nav div a{color:var(--dim)}nav div a:hover{color:var(--cy);text-decoration:none}
+section{max-width:1000px;margin:0 auto;padding:56px 24px}
+.hero{padding-top:32px}
+.hero h1{font-size:clamp(44px,9vw,92px);font-weight:700;letter-spacing:-.02em;margin-bottom:12px;text-shadow:3px 0 var(--pk),-3px 0 var(--cy)}
+.hero p.sub{color:var(--dim);max-width:56ch;margin:0 0 28px}
+.term{background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 0 0 1px rgba(56,225,255,.08),0 20px 60px rgba(0,0,0,.5);overflow:hidden}
+.bar{display:flex;gap:7px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);font-size:12px;color:var(--dim)}
+.bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.bar i:first-child{background:var(--pk)}
+.bar span{margin-left:8px}
+#out{height:320px;overflow-y:auto;padding:16px;font-size:14px;white-space:pre-wrap;word-break:break-word}
+#out .c{color:var(--cy)}#out .p{color:var(--pk)}#out .g{color:var(--ok)}#out .d{color:var(--dim)}
+.in{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--line);font-size:14px}
+.in label{color:var(--ok);white-space:nowrap}
+.in input{flex:1;min-width:0;background:none;border:0;color:var(--txt);font:inherit;outline:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips button{background:none;border:1px solid var(--line);color:var(--cy);font:inherit;font-size:13px;padding:6px 12px;border-radius:6px;cursor:pointer}
+.chips button:hover{border-color:var(--cy)}
+h2{font-size:clamp(28px,5vw,40px);margin-bottom:24px}
+h2::before{content:"# ";color:var(--pk)}
+.about{display:grid;gap:24px;grid-template-columns:1.4fr 1fr}
+.about p{margin:0 0 14px;max-width:62ch}
+.facts{border-left:2px solid var(--pk);padding-left:18px;color:var(--dim);font-size:14px}
+.facts div{margin-bottom:10px}.facts b{color:var(--txt);font-weight:600}
+.tools{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.tool{border:1px solid var(--line);background:var(--panel);padding:16px;border-radius:6px}
+.tool h3{font-size:19px;margin-bottom:4px;color:var(--cy)}
+.tool p{margin:0;color:var(--dim);font-size:13px}
+.tool.k{border-color:var(--pk)}
+.cat{color:var(--dim);font-size:14px;margin:28px 0 12px}
+.proj{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{display:block;border:1px solid var(--line);background:var(--panel);padding:24px;border-radius:8px;color:var(--txt);transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--cy);text-decoration:none;transform:translateY(-3px)}
+.card h3{font-size:26px;margin-bottom:8px}
+.card p{margin:0 0 16px;color:var(--dim);font-size:14px}
+.card span{color:var(--cy);font-size:14px}
+footer{max-width:1000px;margin:0 auto;padding:40px 24px 60px;color:var(--dim);font-size:13px;position:relative;z-index:1}
+@media(max-width:720px){.about{grid-template-columns:1fr}#out{height:280px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="#top">antoine<b>@</b>kali</a>
+<div><a href="#about">à propos</a><a href="#skills">compétences</a><a href="#projects">projets</a><a href="#contact">contact</a></div></nav>
+<main id="top">
+<section class="hero">
+<h1>Antoine</h1>
+<p class="sub">18 ans, passionné de cybersécurité. J’apprends, je teste et je construis sous Kali Linux. Tape une commande dans le terminal ci-dessous pour m’explorer.</p>
+<div class="term">
+<div class="bar"><i></i><i></i><i></i><span>antoine@kali: ~</span></div>
+<div id="out" aria-live="polite"></div>
+<div class="in"><label for="cmd">antoine@kali:~$</label><input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="tape help"></div>
+</div>
+<div class="chips" id="chips"></div>
+</section>
+
+<section id="about">
+<h2>À propos</h2>
+<div class="about">
+<div>
+<p>Je m’appelle Antoine, j’ai 18 ans et je suis à fond dans la cyber. J’aime comprendre comment les systèmes fonctionnent, comment on peut les casser, et comment les protéger.</p>
+<p>Je suis en première année de BTS CIEL (Cybersécurité, Informatique et réseaux, Électronique). Je m’entraîne aussi sous Kali Linux avec plusieurs outils de test d’intrusion, et je partage mon travail en ligne via GitHub et mon projet CyberCrew.</p>
+</div>
+<div class="facts">
+<div><b>Âge</b><br>18 ans</div>
+<div><b>Formation</b><br>BTS CIEL, 1re année</div>
+<div><b>Domaine</b><br>Cybersécurité</div>
+<div><b>Système</b><br>Kali Linux</div>
+<div><b>GitHub</b><br><a href="https://github.com/jesuiscob" target="_blank" rel="noopener">jesuiscob</a></div>
+</div>
+</div>
+</section>
+
+<section id="skills">
+<h2>Compétences</h2>
+<p class="cat">Outils Kali Linux que j’utilise</p>
+<div class="tools">
+<div class="tool"><h3>Nmap</h3><p>Scan de ports et découverte de services sur un réseau.</p></div>
+<div class="tool"><h3>Wireshark</h3><p>Capture et analyse du trafic réseau.</p></div>
+<div class="tool"><h3>Burp Suite</h3><p>Analyse et test de sécurité des applications web.</p></div>
+<div class="tool"><h3>Metasploit</h3><p>Framework de tests d’intrusion et d’exploitation.</p></div>
+<div class="tool"><h3>Hydra</h3><p>Test de robustesse des mots de passe.</p></div>
+<div class="tool"><h3>John the Ripper</h3><p>Audit de hachages et mots de passe.</p></div>
+<div class="tool"><h3>Aircrack-ng</h3><p>Audit de la sécurité des réseaux Wi-Fi.</p></div>
+<div class="tool"><h3>Gobuster</h3><p>Découverte de répertoires et fichiers cachés.</p></div>
+</div>
+<p class="cat">Bases</p>
+<div class="tools">
+<div class="tool k"><h3>Linux</h3><p>Ligne de commande, permissions, administration.</p></div>
+<div class="tool k"><h3>Réseaux</h3><p>TCP/IP, ports, protocoles courants.</p></div>
+<div class="tool k"><h3>Pentest</h3><p>Reconnaissance, analyse de vulnérabilités, rapport.</p></div>
+</div>
+</section>
+
+<section id="projects">
+<h2>Projets</h2>
+<div class="proj">
+<a class="card" href="https://cyberccrew.fr" target="_blank" rel="noopener"><h3>CyberCrew</h3><p>Mon autre site, dédié à la cyber. Tu y retrouves toutes les infos sur mon GitHub.</p><span>cyberccrew.fr</span></a>
+<a class="card" href="https://github.com/jesuiscob" target="_blank" rel="noopener"><h3>GitHub</h3><p>Mes dépôts, scripts et projets de sécurité.</p><span>github.com/jesuiscob</span></a>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Un projet, une question, un défi à relever ? Écris-moi sur Discord : <b>jesuiscob</b>. Tu peux aussi passer par mon GitHub ou par CyberCrew.</p>
+</section>
+</main>
+<footer>© 2026 Antoine. Sites et tests réalisés dans un cadre légal et éthique.</footer>
+
+<script>
+(function(){
+var out=document.getElementById('out'),inp=document.getElementById('cmd'),chips=document.getElementById('chips');
+var hist=[],hi=0;
+var cmds={
+help:'Commandes disponibles :\n<span class="c">whoami</span>  qui je suis\n<span class="c">skills</span>  mes compétences\n<span class="c">tools</span>   mes outils Kali\n<span class="c">projects</span>  mes projets\n<span class="c">github</span>  mon GitHub\n<span class="c">contact</span>  me retrouver\n<span class="c">clear</span>  vider le terminal',
+whoami:'<span class="g">antoine</span>\n18 ans, BTS CIEL en 1re année.\nPassionné de cybersécurité.\nJ’apprends et je pratique sous Kali Linux.',
+skills:'Linux · Réseaux · Pentest · Analyse de trafic · Sécurité web\nTape <span class="c">tools</span> pour voir mes outils.',
+tools:'nmap · wireshark · burpsuite · metasploit\nhydra · john · aircrack-ng · gobuster',
+projects:'1. CyberCrew  →  <a href="https://cyberccrew.fr" target="_blank" rel="noopener">cyberccrew.fr</a>\n2. GitHub     →  <a href="https://github.com/jesuiscob" target="_blank" rel="noopener">github.com/jesuiscob</a>',
+github:'<a href="https://github.com/jesuiscob" target="_blank" rel="noopener">github.com/jesuiscob</a>',
+contact:'Discord : <span class="g">jesuiscob</span>\nGitHub : <a href="https://github.com/jesuiscob" target="_blank" rel="noopener">jesuiscob</a>\nSite : <a href="https://cyberccrew.fr" target="_blank" rel="noopener">cyberccrew.fr</a>'
+};
+function add(h){var d=document.createElement('div');d.innerHTML=h;out.appendChild(d);out.scrollTop=out.scrollHeight}
+function esc(s){return s.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function run(c){
+c=c.trim();if(!c)return;
+add('<span class="d">antoine@kali:~$</span> '+esc(c));
+var k=c.toLowerCase();
+if(k==='clear'){out.innerHTML='';return}
+if(cmds[k]){add(cmds[k]+'\n')}
+else if(k==='sudo su'||k.indexOf('sudo')===0){add('<span class="p">Bien tenté. Permission refusée.</span>\n')}
+else{add('<span class="p">commande introuvable : '+esc(c)+'</span>  (tape help)\n')}
+}
+Object.keys({whoami:1,skills:1,tools:1,projects:1,contact:1}).forEach(function(n){
+var b=document.createElement('button');b.type='button';b.textContent=n;b.onclick=function(){run(n);inp.focus({preventScroll:true})};chips.appendChild(b)});
+inp.addEventListener('keydown',function(e){
+if(e.key==='Enter'){hist.push(inp.value);hi=hist.length;run(inp.value);inp.value=''}
+else if(e.key==='ArrowUp'&&hi>0){hi--;inp.value=hist[hi];e.preventDefault()}
+else if(e.key==='ArrowDown'&&hi<hist.length){hi++;inp.value=hist[hi]||'';e.preventDefault()}});
+var intro='Initialisation… <span class="g">OK</span>\nBienvenue sur le profil d’Antoine.\nTape <span class="c">help</span> pour commencer.\n';
+add(intro);
+})();
+</script>
+</body>
+</html>
